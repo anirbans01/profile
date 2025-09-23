@@ -6,54 +6,100 @@
   <title>My Profile</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background: #f4f4f9;
       margin: 0;
-      padding: 0;
-    }
-    .profile-card {
-      background: #fff;
-      max-width: 400px;
-      margin: 50px auto;
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-    .profile-card img {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid #4CAF50;
-    }
-    .profile-card h1 {
-      margin: 15px 0 5px;
-      font-size: 24px;
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
       color: #333;
     }
-    .profile-card p {
-      color: #555;
+    /* Menu bar */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #2c3e50;
+      padding: 10px 20px;
+      color: white;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 22px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
       font-size: 16px;
     }
-    .social-links a {
-      margin: 0 10px;
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* Layout: photo + about section */
+    .profile-section {
+      display: flex;
+      align-items: flex-start;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .profile-pic {
+      width: 180px;
+      height: 180px;
+      border-radius: 10px;
+      object-fit: cover;
+      margin-right: 30px;
+      border: 3px solid #2c3e50;
+    }
+    .about {
+      flex: 1;
+    }
+    .about h2 {
+      margin-top: 0;
+      color: #2c3e50;
+    }
+    .about p {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+    .linkedin {
+      margin-top: 15px;
+    }
+    .linkedin a {
+      color: #0077b5;
       text-decoration: none;
-      color: #4CAF50;
       font-weight: bold;
+    }
+    .linkedin a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
-  <div class="profile-card">
-    <img src="profile.jpg" alt="My Photo">
-    <h1>Your Name</h1>
-    <p>🌟 Web Developer | AI Enthusiast | Tech Explorer</p>
-    <p>Hello! I’m passionate about coding, AI, and building cool projects.</p>
-    
-    <div class="social-links">
-      <a href="https://github.com/your-username" target="_blank">GitHub</a>
-      <a href="https://linkedin.com/in/your-username" target="_blank">LinkedIn</a>
+  <!-- Top Menu Bar -->
+  <header>
+    <h1>My Profile</h1>
+    <nav>
+      <a href="#">About</a>
+      <a href="#">Blog</a>
+    </nav>
+  </header>
+
+  <!-- Profile Section -->
+  <div class="profile-section">
+    <img src="anirban.jpg" alt="My Photo" class="profile-pic">
+    <div class="about">
+      <h2>About Me</h2>
+      <p>
+        I am an <strong>Enterprise Architect</strong> with over two decades of experience. 
+        I specialize in designing and delivering scalable, secure, and innovative technology solutions for complex business needs. 
+      </p>
+      <p class="linkedin">
+        📄 For my most up-to-date CV details, please visit my 
+        <a href="https://www.linkedin.com/in/anirban-sarkar-aiml/" target="_blank">LinkedIn profile</a>.
+      </p>
     </div>
   </div>
 </body>
