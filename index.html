@@ -4,8 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Blogging Site</title>
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="anirban.jpg">
   <style>
     body {
       margin: 0;
@@ -17,7 +15,7 @@
 
     /* Sidebar */
     .sidebar {
-      width: 280px;
+      width: 220px;
       background: #2c3e50;
       color: white;
       min-height: 100vh;
@@ -27,8 +25,8 @@
       overflow-y: auto;
     }
     .sidebar img {
-      width: 160px;
-      height: 160px;
+      width: 140px;
+      height: 140px;
       border-radius: 50%;
       object-fit: cover;
       border: 3px solid #fff;
@@ -38,9 +36,10 @@
     .sidebar h2 {
       text-align: center;
       margin: 10px 0 20px;
+      font-size: 1.4em;
     }
     .about-me {
-      font-size: 15px;
+      font-size: 14px;
       line-height: 1.6;
     }
     .about-me strong {
@@ -74,9 +73,92 @@
 
     /* Main Content */
     .main-content {
-      margin-left: 280px; /* make space for sidebar */
+      margin-left: 220px; /* make space for sidebar */
+      margin-right: 240px; /* make space for right sidebar */
       padding: 30px;
       flex: 1;
+      max-width: 800px;
+    }
+
+    /* Right Sidebar */
+    .right-sidebar {
+      width: 240px;
+      background: #34495e;
+      color: white;
+      min-height: 100vh;
+      padding: 20px;
+      box-sizing: border-box;
+      position: fixed;
+      right: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .right-sidebar h2 {
+      text-align: center;
+      margin-top: 0;
+      color: #f1c40f;
+      border-bottom: 2px solid #f1c40f;
+      padding-bottom: 10px;
+      font-size: 1.3em;
+      flex-shrink: 0; /* Prevent title from shrinking */
+    }
+    
+    .top-stories-container {
+      flex: 1;
+      overflow-y: auto;
+      padding-right: 5px;
+      margin-top: 10px;
+    }
+    
+    /* Custom scrollbar for top stories */
+    .top-stories-container::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    .top-stories-container::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+    }
+    
+    .top-stories-container::-webkit-scrollbar-thumb {
+      background: #f1c40f;
+      border-radius: 4px;
+    }
+    
+    .top-stories-container::-webkit-scrollbar-thumb:hover {
+      background: #d4ac0d;
+    }
+    
+    .top-story {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 15px;
+      transition: transform 0.2s;
+      cursor: pointer;
+    }
+    
+    .top-story:hover {
+      transform: translateY(-3px);
+      background: rgba(255, 255, 255, 0.15);
+    }
+    
+    .top-story h3 {
+      margin-top: 0;
+      font-size: 16px;
+      line-height: 1.3;
+    }
+    
+    .top-story p {
+      font-size: 14px;
+      line-height: 1.4;
+      margin-bottom: 10px;
+    }
+    
+    .top-story .meta {
+      font-size: 12px;
+      color: #bdc3c7;
     }
 
     /* Blog Post Templates */
@@ -120,10 +202,30 @@
     #previous-blogs ul li a:hover {
       text-decoration: underline;
     }
+    
+    /* Responsive Design */
+    @media (max-width: 1200px) {
+      .right-sidebar {
+        display: none;
+      }
+      .main-content {
+        margin-right: 0;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .sidebar {
+        display: none;
+      }
+      .main-content {
+        margin-left: 0;
+        padding: 20px;
+      }
+    }
   </style>
 </head>
 <body>
-  <!-- Sidebar -->
+  <!-- Left Sidebar -->
   <aside class="sidebar">
     <img src="anirban.jpg" alt="My Photo">
     <h2>Anirban Sarkar</h2>
@@ -156,141 +258,186 @@
 
     <div class="post">
       <article id="vector-databases" class="content">
-  <header>
-    <h1>🧭 Understanding Vector Databases: How They Work and Why They Matter</h1>
-    <p class="intro"><strong>🔹 Introduction</strong></p>
-  </header>
+        <header>
+          <h1>🧭 Understanding Vector Databases: How They Work and Why They Matter</h1>
+          <p class="intro"><strong>🔹 Introduction</strong></p>
+        </header>
 
-  <section aria-labelledby="intro">
-    <p id="intro">
-      In today’s AI-driven world, traditional databases are no longer sufficient for handling unstructured data
-      such as images, videos, audio, and natural language. Enter the <strong>vector database</strong>—a new class of
-      databases designed to store, index, and query <em>vector embeddings</em>, the numerical representations of
-      unstructured data.
-    </p>
+        <section aria-labelledby="intro">
+          <p id="intro">
+            In today's AI-driven world, traditional databases are no longer sufficient for handling unstructured data
+            such as images, videos, audio, and natural language. Enter the <strong>vector database</strong>—a new class of
+            databases designed to store, index, and query <em>vector embeddings</em>, the numerical representations of
+            unstructured data.
+          </p>
 
-    <p>
-      Vector databases power modern applications like <strong>semantic search</strong>, <strong>recommendation systems</strong>,
-      <strong>fraud detection</strong>, and <strong>generative AI</strong> by enabling machines to “understand” similarity
-      between data points, not just exact matches.
-    </p>
-  </section>
+          <p>
+            Vector databases power modern applications like <strong>semantic search</strong>, <strong>recommendation systems</strong>,
+            <strong>fraud detection</strong>, and <strong>generative AI</strong> by enabling machines to "understand" similarity
+            between data points, not just exact matches.
+          </p>
+        </section>
 
-  <section aria-labelledby="what-is-vector">
-    <h2 id="what-is-vector">🔹 What is a Vector?</h2>
-    <p>
-      A <strong>vector</strong> is simply a list of numbers that represents data in a high-dimensional space.
-      For example, an AI model might convert a sentence like <code>“I love pizza”</code> into a 768-dimensional vector.
-      Similar sentences (e.g., <em>“Pizza is great”</em>) will have vectors close to each other in this high-dimensional space.
-      This closeness allows us to measure semantic similarity using mathematical distance metrics.
-    </p>
-  </section>
+        <section aria-labelledby="what-is-vector">
+          <h2 id="what-is-vector">🔹 What is a Vector?</h2>
+          <p>
+            A <strong>vector</strong> is simply a list of numbers that represents data in a high-dimensional space.
+            For example, an AI model might convert a sentence like <code>"I love pizza"</code> into a 768-dimensional vector.
+            Similar sentences (e.g., <em>"Pizza is great"</em>) will have vectors close to each other in this high-dimensional space.
+            This closeness allows us to measure semantic similarity using mathematical distance metrics.
+          </p>
+        </section>
 
-  <!-- Optional placeholder for a diagram -->
-  <figure aria-label="Vector DB workflow diagram">
-    <!-- Insert your image or diagram here -->
-    <img src="images/vector database 1.jpg" alt=" Vector Database Concept">
-    <figcaption></figcaption>
-  </figure>
+        <section aria-labelledby="core-idea">
+          <h2 id="core-idea">🔹 Core Idea of a Vector Database</h2>
+          <p>A vector database stores embeddings and makes it easy to:</p>
+          <ul>
+            <li><strong>Insert</strong> – Store embeddings generated by models.</li>
+            <li><strong>Index</strong> – Organize them for fast retrieval.</li>
+            <li><strong>Search</strong> – Query similar vectors using similarity metrics like cosine similarity, Euclidean distance, or dot product.</li>
+          </ul>
+          <p>
+            This enables <strong>Approximate Nearest Neighbor (ANN) Search</strong>, which finds the "closest" vectors quickly,
+            even in billions of records.
+          </p>
+        </section>
 
-  <section aria-labelledby="core-idea">
-    <h2 id="core-idea">🔹 Core Idea of a Vector Database</h2>
-    <p>A vector database stores embeddings and makes it easy to:</p>
-    <ul>
-      <li><strong>Insert</strong> – Store embeddings generated by models.</li>
-      <li><strong>Index</strong> – Organize them for fast retrieval.</li>
-      <li><strong>Search</strong> – Query similar vectors using similarity metrics like cosine similarity, Euclidean distance, or dot product.</li>
-    </ul>
-    <p>
-      This enables <strong>Approximate Nearest Neighbor (ANN) Search</strong>, which finds the “closest” vectors quickly,
-      even in billions of records.
-    </p>
-  </section>
+        <section aria-labelledby="how-it-works">
+          <h2 id="how-it-works">🔹 How Does a Vector Database Work?</h2>
+          <ol>
+            <li>
+              <strong>Data Ingestion</strong><br>
+              Raw data (text, image, audio) is processed through an AI model (e.g., BERT, CLIP, or OpenAI embeddings) that
+              outputs a high-dimensional vector representation.
+            </li>
+            <li>
+              <strong>Storage & Indexing</strong><br>
+              Vectors are stored and indexed using specialized algorithms (e.g., HNSW, IVF) to optimize retrieval.
+            </li>
+            <li>
+              <strong>Similarity Search</strong><br>
+              A user query is converted to a vector; the database compares distances between the query vector and stored vectors
+              to find nearest neighbors.
+            </li>
+            <li>
+              <strong>Ranking & Retrieval</strong><br>
+              Results are ranked by similarity score and returned with metadata (document IDs, links, thumbnails) for interpretability.
+            </li>
+          </ol>
+        </section>
 
-  <section aria-labelledby="how-it-works">
+        <section aria-labelledby="use-cases">
+          <h2 id="use-cases">🔹 Popular Use Cases</h2>
+          <ul>
+            <li><strong>Semantic Search</strong> – Find results by meaning rather than exact keyword matches.</li>
+            <li><strong>Recommendation Systems</strong> – Match users with similar preferences (music, movies, products).</li>
+            <li><strong>Fraud Detection</strong> – Spot unusual transaction patterns via similarity to historical vectors.</li>
+            <li><strong>Multimodal AI</strong> – Connect images, text, and audio in one vector space.</li>
+            <li><strong>Generative AI Memory (RAG)</strong> – Provide LLMs with recent or proprietary context retrieved from vectors.</li>
+          </ul>
+        </section>
 
-            <!-- Optional placeholder for a diagram -->
-        <figure aria-label="Vector DB workflow diagram">
-            <!-- Insert your image or diagram here -->
-            <img src="images/vector_database2.jpg" alt=" Vector Database Concept">
-            <figcaption></figcaption>
-        </figure>
+        <section aria-labelledby="leading-dbs">
+          <h2 id="leading-dbs">🔹 Leading Vector Databases</h2>
+          <p>Examples of popular solutions and libraries:</p>
+          <ul>
+            <li><strong>Pinecone</strong> – Fully managed, serverless vector DB.</li>
+            <li><strong>Weaviate</strong> – Open-source with GraphQL and hybrid search support.</li>
+            <li><strong>Milvus</strong> – Scalable, cloud-native, open-source engine.</li>
+            <li><strong>FAISS</strong> – Library (by Meta) for ANN search often embedded in applications.</li>
+          </ul>
+        </section>
 
-    <h2 id="how-it-works">🔹 How Does a Vector Database Work?</h2>
-    <ol>
-      <li>
-        <strong>Data Ingestion</strong><br>
-        Raw data (text, image, audio) is processed through an AI model (e.g., BERT, CLIP, or OpenAI embeddings) that
-        outputs a high-dimensional vector representation.
-      </li>
-      <li>
-        <strong>Storage & Indexing</strong><br>
-        Vectors are stored and indexed using specialized algorithms (e.g., HNSW, IVF) to optimize retrieval.
-      </li>
-      <li>
-        <strong>Similarity Search</strong><br>
-        A user query is converted to a vector; the database compares distances between the query vector and stored vectors
-        to find nearest neighbors.
-      </li>
-      <li>
-        <strong>Ranking & Retrieval</strong><br>
-        Results are ranked by similarity score and returned with metadata (document IDs, links, thumbnails) for interpretability.
-      </li>
-    </ol>
-  </section>
+        <section aria-labelledby="why-matter">
+          <h2 id="why-matter">🔹 Why Vector Databases Matter</h2>
+          <p>
+            As unstructured data grows, vector databases solve search and retrieval bottlenecks by enabling semantic search and
+            reasoning at scale. They bridge the gap between human-like understanding and machine processing, powering smarter,
+            more context-aware applications.
+          </p>
+        </section>
 
-  <section aria-labelledby="use-cases">
-    <h2 id="use-cases">🔹 Popular Use Cases</h2>
-    <ul>
-      <li><strong>Semantic Search</strong> – Find results by meaning rather than exact keyword matches.</li>
-      <li><strong>Recommendation Systems</strong> – Match users with similar preferences (music, movies, products).</li>
-      <li><strong>Fraud Detection</strong> – Spot unusual transaction patterns via similarity to historical vectors.</li>
-      <li><strong>Multimodal AI</strong> – Connect images, text, and audio in one vector space.</li>
-      <li><strong>Generative AI Memory (RAG)</strong> – Provide LLMs with recent or proprietary context retrieved from vectors.</li>
-    </ul>
-  </section>
-
-  <section aria-labelledby="leading-dbs">
-    <h2 id="leading-dbs">🔹 Leading Vector Databases</h2>
-    <p>Examples of popular solutions and libraries:</p>
-    <ul>
-      <li><strong>Pinecone</strong> – Fully managed, serverless vector DB.</li>
-      <li><strong>Weaviate</strong> – Open-source with GraphQL and hybrid search support.</li>
-      <li><strong>Milvus</strong> – Scalable, cloud-native, open-source engine.</li>
-      <li><strong>FAISS</strong> – Library (by Meta) for ANN search often embedded in applications.</li>
-    </ul>
-  </section>
-
-  <section aria-labelledby="why-matter">
-    <h2 id="why-matter">🔹 Why Vector Databases Matter</h2>
-    <p>
-      As unstructured data grows, vector databases solve search and retrieval bottlenecks by enabling semantic search and
-      reasoning at scale. They bridge the gap between human-like understanding and machine processing, powering smarter,
-      more context-aware applications.
-    </p>
-  </section>
-
-  <section aria-labelledby="conclusion">
-    <h2 id="conclusion">🔹 Conclusion</h2>
-    <p>
-      Vector databases are becoming the backbone of AI-powered systems. By converting raw data into embeddings and enabling
-      similarity-based retrieval, they unlock intelligent search, personalization, and contextual understanding. Expect
-      hybrid systems—combining SQL-style queries with semantic vector queries—to reshape enterprise data architecture in the years ahead.
-    </p>
-  </section>
-
-</div>
-
-    <!-- Previous Blogs Section 
-    <section id="previous-blogs">
-      <h2>📚 Previous Blogs</h2>
-      <ul>
-        <li><a href="#">🌐 The Future of Cloud Architecture</a></li>
-        <li><a href="#">🤖 AI and Enterprise Transformation</a></li>
-        <li><a href="#">⚙️ DevSecOps Best Practices</a></li>
-        <li><a href="#">📈 Scaling Systems for Growth</a></li>
-      </ul>
-    </section> -->
+        <section aria-labelledby="conclusion">
+          <h2 id="conclusion">🔹 Conclusion</h2>
+          <p>
+            Vector databases are becoming the backbone of AI-powered systems. By converting raw data into embeddings and enabling
+            similarity-based retrieval, they unlock intelligent search, personalization, and contextual understanding. Expect
+            hybrid systems—combining SQL-style queries with semantic vector queries—to reshape enterprise data architecture in the years ahead.
+          </p>
+        </section>
+      </article>
+    </div>
   </main>
+
+  <!-- Right Sidebar - Top Stories -->
+  <aside class="right-sidebar">
+    <h2>🔥 Top Stories This Week</h2>
+    
+    <div class="top-stories-container">
+      <div class="top-story">
+        <h3>AI Revolution in Healthcare</h3>
+        <p>How artificial intelligence is transforming diagnostics and patient care with unprecedented accuracy.</p>
+        <div class="meta">
+          <span>📅 3 days ago</span>
+        </div>
+      </div>
+      
+      <div class="top-story">
+        <h3>Quantum Computing Breakthrough</h3>
+        <p>Researchers achieve quantum supremacy with new 256-qubit processor, opening doors to previously impossible calculations.</p>
+        <div class="meta">
+          <span>📅 5 days ago</span>
+        </div>
+      </div>
+      
+      <div class="top-story">
+        <h3>The Future of Remote Work</h3>
+        <p>How hybrid models are reshaping corporate culture and productivity in the post-pandemic era.</p>
+        <div class="meta">
+          <span>📅 1 week ago</span>
+        </div>
+      </div>
+      
+      <div class="top-story">
+        <h3>Blockchain Beyond Cryptocurrency</h3>
+        <p>Exploring practical applications of blockchain technology in supply chain, voting systems, and digital identity.</p>
+        <div class="meta">
+          <span>📅 4 days ago</span>
+        </div>
+      </div>
+      
+      <div class="top-story">
+        <h3>Edge Computing Trends 2023</h3>
+        <p>How processing data closer to the source is revolutionizing IoT, autonomous vehicles, and real-time analytics.</p>
+        <div class="meta">
+          <span>📅 2 days ago</span>
+        </div>
+      </div>
+      
+      <div class="top-story">
+        <h3>Cybersecurity in the Age of AI</h3>
+        <p>How machine learning is being used both to enhance security measures and by attackers to create more sophisticated threats.</p>
+        <div class="meta">
+          <span>📅 6 days ago</span>
+        </div>
+      </div>
+      
+      <div class="top-story">
+        <h3>Sustainable Technology Solutions</h3>
+        <p>Innovations in green tech that are helping companies reduce their carbon footprint while maintaining efficiency.</p>
+        <div class="meta">
+          <span>📅 3 days ago</span>
+        </div>
+      </div>
+      
+      <div class="top-story">
+        <h3>The Rise of Low-Code Platforms</h3>
+        <p>How low-code and no-code platforms are democratizing software development across industries.</p>
+        <div class="meta">
+          <span>📅 5 days ago</span>
+        </div>
+      </div>
+    </div>
+  </aside>
 </body>
 </html>
