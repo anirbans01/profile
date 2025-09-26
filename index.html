@@ -13,6 +13,42 @@
       display: flex;
     }
 
+    /* Search Bar */
+    .search-container {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      width: 400px;
+      display: flex;
+      background: white;
+      border-radius: 25px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    
+    .search-bar {
+      flex: 1;
+      padding: 12px 20px;
+      border: none;
+      font-size: 16px;
+      outline: none;
+    }
+    
+    .search-button {
+      background: #1abc9c;
+      color: white;
+      border: none;
+      padding: 0 20px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    
+    .search-button:hover {
+      background: #16a085;
+    }
+
     /* Sidebar */
     .sidebar {
       width: 220px;
@@ -78,6 +114,7 @@
       padding: 30px;
       flex: 1;
       max-width: 800px;
+      margin-top: 70px; /* Added space for search bar */
     }
 
     /* Right Sidebar */
@@ -221,10 +258,21 @@
         margin-left: 0;
         padding: 20px;
       }
+      
+      .search-container {
+        width: 90%;
+        top: 10px;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Search Bar -->
+  <div class="search-container">
+    <input type="text" class="search-bar" placeholder="Search blog posts..." id="search-input">
+    <button class="search-button" onclick="performSearch()">🔍</button>
+  </div>
+
   <!-- Left Sidebar -->
   <aside class="sidebar">
     <img src="anirban.jpg" alt="My Photo">
@@ -246,12 +294,10 @@
 
   <!-- Main Content Area -->
   <main class="main-content">
-    <h1>My Blog</h1>
-
     <div class="post">
-      <h3>🚀 Welcome Note</h3>
+      <h3>🚀 Welcome to my blog! </h3>
       <p>
-        Welcome to my blog! Here, I share my experiences and insights on various topics, 
+        Here, I share my experiences and insights on various topics, 
         covering technology strategy, cloud computing, and artificial intelligence. Stay tuned for regular updates!
       </p>
     </div>
@@ -439,5 +485,43 @@
       </div>
     </div>
   </aside>
+
+  <script>
+    // Search functionality
+    function performSearch() {
+      const searchTerm = document.getElementById('search-input').value.toLowerCase().trim();
+      
+      if (searchTerm === '') {
+        alert('Please enter a search term');
+        return;
+      }
+      
+      // Simple search implementation - highlights matching text
+      const posts = document.querySelectorAll('.post');
+      let found = false;
+      
+      posts.forEach(post => {
+        const text = post.textContent.toLowerCase();
+        if (text.includes(searchTerm)) {
+          post.style.border = '2px solid #1abc9c';
+          post.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          found = true;
+        } else {
+          post.style.border = '';
+        }
+      });
+      
+      if (!found) {
+        alert('No results found for: ' + searchTerm);
+      }
+    }
+    
+    // Allow pressing Enter to search
+    document.getElementById('search-input').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        performSearch();
+      }
+    });
+  </script>
 </body>
 </html>
