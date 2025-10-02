@@ -1,137 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>My Blogging Site</title>
-  <link rel="icon" type="image/png" href="anirban.jpg"> <!-- ✅ Favicon -->
+  <link rel="icon" type="image/png" href="anirban.jpg">
+
   <style>
+    :root {
+      --left-width: 220px;
+      --right-width: 300px;   /* expanded */
+      --right-collapsed: 40px;/* collapsed keeps toggle visible */
+      --transition: 300ms;
+    }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
       background: #f8f9fa;
-      color: #333;
-      display: flex;
+      color: #222;
+      --rs: var(--right-width);
     }
+    body.right-collapsed { --rs: var(--right-collapsed); }
 
-    /* Search Bar */
-    .search-container {
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 1000;
-      width: 400px;
-      display: flex;
-      background: white;
-      border-radius: 25px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      overflow: hidden;
-    }
-    
-    .search-bar {
-      flex: 1;
-      padding: 12px 20px;
-      border: none;
-      font-size: 16px;
-      outline: none;
-    }
-    
-    .search-button {
-      background: lch(80.14% 3.76 296.04);
-      color: white;
-      border: none;
-      padding: 0 20px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    
-    .search-button:hover {
-      background: hsl(235, 66%, 54%);
-    }
-
-    /* Sidebar */
+    /* left sidebar */
     .sidebar {
-      width: 220px;
-      background: hsl(250, 86%, 14%);
-      color: white;
-      min-height: 100vh;
-      padding: 20px;
-      box-sizing: border-box;
-      position: fixed;
-      overflow-y: auto;
+      position: fixed; left: 0; top: 0;
+      width: var(--left-width); height: 100vh;
+      background: hsl(250,86%,14%); color: white;
+      padding: 20px; box-sizing: border-box;
+      overflow-y: auto; z-index: 20;
     }
-    .sidebar img {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid #fff;
-      display: block;
-      margin: 0 auto 20px;
-    }
-    .sidebar h2 {
-      text-align: center;
-      margin: 10px 0 20px;
-      font-size: 1.4em;
-    }
-    .about-me {
-      font-size: 14px;
-      line-height: 1.6;
-    }
+    .sidebar img { display:block; width:140px; height:140px;
+      border-radius:50%; object-fit:cover; margin:0 auto 16px;
+      border:3px solid #fff; }
+    .sidebar h2 { text-align:center; margin:0 0 14px; font-size:1.2rem; }
+    .about-me { font-size:14px; line-height:1.5; }
     .about-me strong {
       color: #f1c40f;
     }
-    .about-me a {
-      color: #1abc9c;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    .about-me a:hover {
-      text-decoration: underline;
-    }
+    .libutton { display:inline-block; margin-top:12px; padding:8px 12px;
+      background:#0A66C2; color:#fff; border-radius:14px;
+      text-decoration:none; font-weight:600; }
 
-    .sidebar .links {
-      margin-top: 20px;
-      text-align: center;
+    /* main content */
+    .main-content {
+      box-sizing: border-box;
+      padding: 30px; padding-top: 80px;
+      margin-left: var(--left-width);
+      margin-right: var(--rs);
+      transition: margin-right var(--transition) ease;
+      min-height: 100vh;
     }
-    .sidebar .links a {
-      display: inline-block;
-      background: hwb(219 37% 7%);
+    .content-wrapper { max-width: 980px; margin: 0 auto; }
+
+
+    /* Toggle Button */
+    .toggle-btn {
+      background: hsl(250, 86%, 14%);
       color: white;
-      text-decoration: none;
-      padding: 8px 14px;
-      border-radius: 10px;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+      font-size: 14px;
       transition: background 0.3s;
     }
-    .sidebar .links a:hover {
-      background: lch(61.65% 0.68 256.01);
-    }
-
-    /* Main Content */
-    .main-content {
-      margin-left: 220px; /* make space for sidebar */
-      margin-right: 240px; /* make space for right sidebar */
-      padding: 30px;
-      flex: 1;
-      max-width: 800px;
-      margin-top: 70px; /* Added space for search bar */
-    }
-
-    /* Right Sidebar */
-    .right-sidebar {
-      width: 240px;
-      background: #ffffffaa;
-      color: white;
-      min-height: 100vh;
-      padding: 20px;
-      box-sizing: border-box;
-      position: fixed;
-      right: 0;
-      display: flex;
-      flex-direction: column;
+    
+    .toggle-btn:hover {
+      background: hsl(227, 70%, 53%);
     }
     
+    /* Hidden content */
+    .hidden-content {
+      display: none;
+      margin-top: 15px;
+    }
+
+    /* right sidebar */
+    .right-sidebar {
+      position: fixed; right: 0; top: 0;
+      width: var(--rs); height: 100vh;
+      background: rgba(255,255,255,0.95);
+      padding: 12px 6px; box-sizing: border-box;
+      overflow: hidden;
+      transition: width var(--transition) ease, padding var(--transition) ease;
+      z-index: 15; display: flex; flex-direction: column;
+      align-items: flex-end;
+    }
+
+    /* toggle button inside */
+    .collapse-btn {
+      width: 36px; height: 36px;
+      border-radius: 50%; border: none;
+      background: hsl(250,86%,14%); color: #fff;
+      display:flex; align-items:center; justify-content:center;
+      cursor:pointer; margin-bottom: 10px;
+      transition: transform var(--transition);
+      flex-shrink: 0;
+    }
+    body.right-collapsed .collapse-btn { transform: rotate(180deg); }
+
     .right-sidebar h2 {
       text-align: center;
       margin-top: 0;
@@ -202,156 +172,86 @@
       font-size: 12px;
       color: #bdc3c7;
     }
-
-    /* Blog Post Templates */
-    .post {
-      background: white;
-      padding: 20px;
-      margin-bottom: 25px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      position: relative;
-      scroll-margin-top: 80px; /* For smooth scrolling to account for fixed header */
-    }
-    .post h3 {
-      margin-top: 0;
-      color: #2c3e50;
-    }
-    .post p {
-      line-height: 1.6;
-      font-size: 16px;
-    }
-    .post .meta {
-      font-size: 14px;
-      color: #888;
-      margin-bottom: 10px;
-    }
     
-    /* Toggle Button */
-    .toggle-btn {
-      background: hsl(250, 86%, 14%);
-      color: white;
-      border: none;
-      padding: 8px 15px;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 10px;
-      font-size: 14px;
-      transition: background 0.3s;
+    /* fade section */
+    .right-content { 
+      flex:1;
+      width: 100%;
+      opacity: 1;
+      transition: opacity var(--transition) ease;
     }
-    
-    .toggle-btn:hover {
-      background: hsl(227, 70%, 53%);
-    }
-    
-    /* Hidden content */
-    .hidden-content {
-      display: none;
-      margin-top: 15px;
+    body.right-collapsed .right-content {
+      opacity: 0;
+      pointer-events: none;
     }
 
-    /* Previous Blogs Section */
-    #previous-blogs h2 {
-      margin-top: 0;
-      color: #2c3e50;
+    .right-title {
+      font-weight:700; color:hsl(250,86%,14%);
+      border-bottom:2px solid hsl(250,86%,14%);
+      margin-bottom:10px; padding-bottom:5px;
+      text-align:center;
     }
-    #previous-blogs ul {
-      list-style-type: none;
-      padding: 0;
+    .top-stories { overflow-y:auto; }
+    .top-story {
+      background:#fff; padding:12px; margin-bottom:10px;
+      border-radius:8px; box-shadow:0 1px 3px rgba(0,0,0,0.06);
+      cursor:pointer;
     }
-    #previous-blogs ul li {
-      margin-bottom: 10px;
+    .top-story h4 { margin:0 0 6px; font-size:15px; }
+    .top-story p { margin:0; font-size:13px; color:#555; }
+
+    /* search bar */
+    .search-container {
+      position: fixed; left: 50%; transform: translateX(-50%);
+      top: 14px; z-index: 50; width: 480px; max-width: calc(100% - 40px);
+      display:flex; background:#fff; border-radius:28px;
+      box-shadow:0 6px 18px rgba(0,0,0,0.08); overflow:hidden;
     }
-    #previous-blogs ul li a {
-      color: #2c3e50;
-      text-decoration: none;
-    }
-    #previous-blogs ul li a:hover {
-      text-decoration: underline;
-    }
-    
-    /* Responsive Design */
-    @media (max-width: 1200px) {
-      .right-sidebar {
-        display: none;
-      }
-      .main-content {
-        margin-right: 0;
-      }
-    }
-    
-    @media (max-width: 768px) {
-      .sidebar {
-        display: none;
-      }
-      .main-content {
-        margin-left: 0;
-        padding: 20px;
-      }
-      
-      .search-container {
-        width: 90%;
-        top: 10px;
-      }
+    .search-bar { flex:1; padding:12px 16px; border:0; outline:none; }
+    .search-button { background:hsl(250,86%,14%); color:#fff; border:0; padding:0 14px; cursor:pointer; }
+
+    .post { background:#fff; padding:20px; border-radius:10px; margin-bottom:20px; box-shadow:0 6px 14px rgba(0,0,0,0.06); }
+    .post h3 { margin-top:0; color:#2c3e50; }
+
+    @media(max-width:900px){
+      .right-sidebar{ display:none; }
+      .main-content{ margin-right:0; }
+      .search-container{ width:90%; }
     }
   </style>
 </head>
 <body>
-  <!-- Search Bar -->
+
+  <!-- search -->
   <div class="search-container">
-    <input type="text" class="search-bar" placeholder="Search blog posts..." id="search-input">
+    <input id="search-input" class="search-bar" placeholder="Search blog posts..." />
     <button class="search-button" onclick="performSearch()">🔍</button>
   </div>
 
-  <!-- Left Sidebar -->
+  <!-- left sidebar -->
   <aside class="sidebar">
-    <img src="anirban.jpg" alt="My Photo">
+    <img src="anirban.jpg" alt="Anirban" />
     <h2>Anirban Sarkar</h2>
     <div class="about-me">
       <p>
         I am an <strong>Enterprise Architect</strong> with over two decades of experience. 
         I specialize in designing and delivering scalable, secure, and innovative technology solutions for complex business needs. 
       </p>
-      <!-- <p>
-        📄 For my most up-to-date CV details, please visit my 
-        <a href="https://www.linkedin.com/in/anirban-sarkar-12765b135/" target="_blank">LinkedIn profile</a>.
-      </p> -->
-      <p>
-        <style>
-        .libutton {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          padding: 7px;
-          text-align: center;
-          outline: none;
-          text-decoration: none !important;
-          color: #ffffff !important;
-          width: 150px;
-          height: 22px;
-          border-radius: 16px;
-          background-color: #0A66C2;
-          font-family: "SF Pro Text", Helvetica, sans-serif;
-        }
-      </style>
-          <a class="libutton" href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=anirban-sarkar-aiml" target="_blank">Follow on LinkedIn</a>
-      </p>
+      <a class="libutton" href="https://www.linkedin.com/in/anirban-sarkar-12765b135/" target="_blank">Follow on LinkedIn</a>
     </div>
-    <!--<div class="links">
-      <a href="#previous-blogs">📚 Previous Blogs</a>
-    </div> -->
   </aside>
 
-  <!-- Main Content Area -->
+  <!-- main -->
   <main class="main-content">
-    <div class="post">
-      <h3>🚀 Welcome to my blog!</h3>
-      <p>
+    <div class="content-wrapper">
+      <article class="post"><h3>🚀 Welcome to my Blog</h3>
+        <p>
         Here, I share my experiences and insights on various topics, 
         covering technology strategy, cloud computing, and artificial intelligence. Stay tuned for regular updates!
       </p>
     </div>
-    <!-- Meta Ad Targeting Post -->
+
+      <!-- Meta Ad Targeting Post -->
   <div class="post" id="meta-ad-targeting">
     <h3>📢 Meta to Use Chatbot Conversations for Ad Targeting</h3>
     <div class="meta">🔖 Social Media, Advertising, AI Policy</div>
@@ -991,16 +891,15 @@
       </div>
       <button class="toggle-btn" onclick="toggleContent(this)">Read More</button>
     </div>
-
   </main>
 
-  <!-- Right Sidebar - Top Stories -->
-  <aside class="right-sidebar">
-    <h2>🔥 Top Stories </h2>
-    
-    <div class="top-stories-container">
-
-      <div class="top-story" onclick="navigateToPost('meta-ad-targeting')">
+  <!-- right sidebar -->
+  <aside class="right-sidebar" id="rightSidebar">
+    <button class="collapse-btn" id="rightToggle" onclick="toggleRightSidebar()">❮</button>
+    <div class="right-content">
+      <span class="right-title">🔥 Top Stories</span>
+      <div class="top-stories-container">
+        <div class="top-story" onclick="navigateToPost('meta-ad-targeting')">
         <h3>Meta to Use Chatbot Conversations for Ads</h3>
         <p>Starting Dec 2025, Meta will use AI chatbot conversations to personalize ads, excluding sensitive topics.</p>
       </div>
@@ -1099,10 +998,30 @@
         <h3>Machine Learning Ethics</h3>
         <p>Examining the ethical considerations and responsibilities in developing and deploying ML systems.</p>
       </div>
+      </div>
     </div>
   </aside>
 
   <script>
+    function toggleRightSidebar(){
+      const body = document.body;
+      const collapsed = body.classList.toggle('right-collapsed');
+      const btn = document.getElementById('rightToggle');
+      btn.textContent = collapsed ? '❯' : '❮';
+    }
+
+    function performSearch1(){
+      const q = document.getElementById('search-input').value.toLowerCase();
+      const posts = document.querySelectorAll('.post');
+      let found = false;
+      posts.forEach(p=>{
+        if(p.textContent.toLowerCase().includes(q)){
+          p.scrollIntoView({behavior:'smooth', block:'center'});
+          p.style.border='2px solid #1abc9c'; found=true;
+        } else { p.style.border=''; }
+      });
+      if(!found) alert('No results found: '+q);
+    }
     // Search functionality
     function performSearch() {
       const searchTerm = document.getElementById('search-input').value.toLowerCase().trim();
@@ -1166,6 +1085,7 @@
         }, 2000);
       }
     }
+
   </script>
 </body>
 </html>
