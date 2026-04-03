@@ -253,6 +253,21 @@
 
     <!-- Agentic Architecture & Product AI Standalone Topics -->
 
+    <div class="post" id="topic-agentic-modernization">
+      <h3>🛠️ How Agents Speed Application Modernization</h3>
+      <div class="meta">🔖 Application Modernization, System Understanding</div>
+      <p>Agents can help teams understand legacy systems and fast-track modernization efforts by automatically mapping behavior and dependencies.</p>
+      <div class="hidden-content">
+        <p>In application modernization, one of the hardest steps is understanding what the existing system does today. Legacy applications are often poorly documented and have been touched by many developers over years. Autonomous agents can scan code, trace runtime behavior, capture data flows, and translate that into human-readable diagrams and reports.</p>
+        <p>These agents can act like expert consultants, identifying key modules, APIs, and integration points. They can observe how third-party libraries are used, which data fields travel between components, and where bottlenecks occur. This visibility reduces risk by giving teams confidence in what they are changing, instead of relying on guesswork.</p>
+        <p>Agents also support collaborative analysis. They can generate interactive documentation for developers and architects, highlighting problematic regions and suggesting refactor paths. For example, they can identify a monolithic module handling both user auth and business rules and recommend splitting those into separate microservices for easier maintenance.</p>
+        <p>Another powerful use case is dependency discovery. Agents can detect hidden dependencies on external systems (database schemas, file stores, message queues) and surface them before modernization changes cause outages. This is especially useful when an application depends on legacy APIs that are no longer supported.</p>
+        <p>Not only do agents accelerate understanding, they also make migration safer through automated testing. They can run baseline behavior tests on the legacy system, then compare results after each incremental modernization step. This creates a safety net so teams can move quickly while protecting existing functionality.</p>
+        <p>Finally, by continuously monitoring the modernized application, agents can identify drift and regressions over time. Modernization is not a one-time project; it’s an ongoing evolution. Agents provide continuous insights, ensuring the system remains healthy and aligned with business goals over years.</p>
+      </div>
+      <button class="toggle-btn" onclick="toggleContent(this)">Read More</button>
+    </div>
+
     <div class="post" id="topic-agentic-architecture">
       <h3>🏗️ Agentic Architecture in Enterprise Systems</h3>
       <div class="meta">🔖 Agentic AI, Enterprise Architecture</div>
@@ -1205,6 +1220,10 @@
     <div class="right-content">
       <span class="right-title">🔥 Top Stories</span>
       <div class="top-stories-container">
+        <div class="top-story" onclick="navigateToPost('topic-agentic-modernization')">
+          <h3>Agents for Application Modernization</h3>
+          <p>How agents can map legacy application behavior and accelerate safe modernization.</p>
+        </div>
         <div class="top-story" onclick="navigateToPost('topic-agentic-architecture')">
           <h3>Agentic Architecture in Enterprise Systems</h3>
           <p>Designing autonomous agent ecosystems that align with enterprise controls and execution goals.</p>
