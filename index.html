@@ -427,6 +427,55 @@
       <button class="toggle-btn" onclick="toggleContent(this)">Read More</button>
     </div>
 
+    <div class="post" id="topic-secure-engineering-agentic-ai">
+      <h3>🔐 Key Focus Areas of Secure Engineering in Today's Agentic AI World</h3>
+      <div class="meta">🔖 Security, Agentic AI, Engineering Practices</div>
+      <p>Agentic AI systems introduce new security challenges. Securing them requires rethinking threat models, governance, and defensive strategies across the entire engineering lifecycle.</p>
+      <div class="hidden-content">
+        <p>Traditional security focused on protecting against external attackers trying to break into systems. Agentic AI introduces new threat vectors: compromised supplier systems, malicious model updates, prompt injections, model poisoning, and agents taking unintended actions in production. Secure engineering in this world requires a fundamentally different approach to building and deploying autonomous systems.</p>
+        
+        <h4>Threat Modeling for Agentic Systems</h4>
+        <p>Agentic systems amplify blast radius. An agent operating data or customer systems can cause harm at scale if compromised or misaligned. Threat modeling must consider: What unintended actions could this agent take? What if it's compromised? What if a malicious user jailbreaks it? What if the underlying model is poisoned? Organizations must map these scenarios and prioritize defenses accordingly.</p>
+        <p>Key threats include: prompt injection (injecting malicious instructions into agent prompts), model poisoning (training data contamination), supply chain attacks (compromised dependencies or model providers), and role confusion (agents operating with excessive permissions).</p>
+        
+        <h4>Supply Chain Security</h4>
+        <p>Agentic systems depend on pre-trained models, fine-tuning data, vectorized knowledge bases, and third-party integrations. Any of these can be compromised. Supply chain security means: vetting model providers and their security practices, verifying model integrity through checksums and signatures, auditing training data for contamination, and monitoring for unexpected model behavior changes.</p>
+        <p>Organizations should treat model updates like security patches—verify their source, test them in staging environments, and have rollback plans if something goes wrong. They should maintain model inventory and provenance, knowing exactly which version and checkpoint each agent uses.</p>
+        
+        <h4>Prompt Injection & Adversarial Robustness</h4>
+        <p>A "prompt injection" attack tricks an agentic system through specially crafted user input. Instead of following its intended instructions, the agent executes attacker-controlled goals. Example: a chatbot used for customer support might be tricked into giving away sensitive information or executing unauthorized transactions.</p>
+        <p>Defense strategies include: using structured APIs instead of freeform prompts, separating user input from system instructions, validating agent outputs before executing actions, and implementing "output guardrails" that detect and block harmful outputs. Testing agents with adversarial prompts—both known attack patterns and novel ones—is critical before deployment.</p>
+        
+        <h4>Access Control & Role-Based Governance</h4>
+        <p>Agentic systems must operate with minimal necessary permissions (principle of least privilege). An agent should never have admin access to all databases just because it needs to query customer data. Organizations should implement role-based access control where agents are granted specific, limited permissions: "read from customer database," "write to logs," "call payment API with amounts under $100."</p>
+        <p>Governance frameworks should define: What actions can each agent perform? What's the approval process for expanding agent permissions? How quickly can permissions be revoked? Organizations should use temporary credential systems—agents request access for short durations rather than possessing permanent credentials. This bounds potential damage if an agent is compromised.</p>
+        
+        <h4>Monitoring & Anomaly Detection</h4>
+        <p>Continuous monitoring detects when agentic systems behave abnormally. This means logging every action agents take, who authorized them, and what outcomes resulted. Organizations should track: unusual patterns in API calls, unexpected resource consumption, actions outside the agent's normal scope, and output quality degradation.</p>
+        <p>Anomaly detection can flag suspicious behavior before it causes damage. If an agent suddenly starts making internal transfer requests (unusual for a customer service chatbot), alerts should trigger immediately. If an agent's accuracy on standard test cases drops significantly, it might indicate model drift or poisoning. Regular audits of agent actions create accountability and enable investigations.</p>
+        
+        <h4>Data Protection & Confidentiality</h4>
+        <p>Agentic systems access sensitive data: customer information, proprietary algorithms, financial records. This data must be protected from exfiltration, both intentionally (by a compromised agent) and unintentionally (through model training data leakage). Organizations should: encrypt data at rest and in transit, implement strict access logging, use data masking in development environments, and carefully audit what data agents can access.</p>
+        <p>Additionally, organizations should avoid training agents on sensitive data if possible. Use retrieval-based approaches where agents query protected databases rather than having sensitive data baked into model weights. This provides better isolation and auditability.</p>
+        
+        <h4>Secure Code Generation & Deployment</h4>
+        <p>When agents generate code or infrastructure, security reviews are essential. Generated code might contain vulnerabilities, hardcoded credentials, or logic errors. Organizations should require: human code review before deployment, static analysis of generated code, testing in isolated environments, and gradual rollout with monitoring.</p>
+        <p>For infrastructure-as-code generation, agents should never generate configurations with security group open to 0.0.0.0, databases without encryption, or disabled authentication. Template-based generation (agents choose from pre-approved, secure templates) is safer than freeform generation.</p>
+        
+        <h4>Explainability & Auditability</h4>
+        <p>When agents take actions, it should be clear why they did so. This supports both security investigations and regulatory compliance. Organizations should maintain: decision logs explaining agent reasoning, action trail showing who/what triggered which actions, and periodic audits of high-impact decisions.</p>
+        <p>For regulated industries (finance, healthcare), explainability is often a legal requirement. Agents must be able to justify decisions to regulators. This also helps catch when agents start making decisions based on spurious correlations in data.</p>
+        
+        <h4>Incident Response & Rollback Plans</h4>
+        <p>Despite best efforts, incidents will happen. A compromised agent, unexpected behavior, or model regression will occur. Organizations need: clear escalation procedures, ability to immediately disable or downgrade agents, rollback mechanisms to revert bad deployments, and post-mortems to learn from failures.</p>
+        <p>Incident response should include containing the damage (what actions did the agent take and can they be reversed?), investigating root cause (was it compromised, misaligned, or victim of prompt injection?), remediating (fix the vulnerability and retest), and communicating transparently with stakeholders.</p>
+        
+        <h4>The Path Forward</h4>
+        <p>Secure engineering in the agentic AI era isn't dramatically different from traditional software security—it's an evolution. Organizations that excel at threat modeling, supply chain security, access control, and monitoring will successfully deploy agentic systems. Those that skip these practices will face incidents. The winners combine agent capabilities with security-first thinking, treating autonomy as a feature that must be earned through demonstrated safety and reliability.</p>
+      </div>
+      <button class="toggle-btn" onclick="toggleContent(this)">Read More</button>
+    </div>
+
     <!-- Evil LLMs: FraudGPT and WormGPT relocated to middle -->
     <div class="post" id="evil-llms-fraudgpt-wormgpt">
         <h3>⚠️ FraudGPT and WormGPT: The Rise of "Evil LLMs"</h3>
@@ -1421,6 +1470,10 @@
           <p>Unified pipelines for code and model release in modern AI-product stacks.</p>
         </div>
 
+        <div class="top-story" onclick="navigateToPost('topic-secure-engineering-agentic-ai')">
+            <h3>Secure Engineering in Agentic AI</h3>
+            <p>Key focus areas for securing autonomous agents: threat modeling, supply chain security, prompt injection defense, and governance.</p>
+        </div>
         <div class="top-story" onclick="navigateToPost('evil-llms-fraudgpt-wormgpt')">
             <h3>Rise of "Evil LLMs"</h3>
             <p>FraudGPT and WormGPT are malicious AI tools sold on the dark web, stripping away ethical constraints to enable sophisticated cybercrime.</p>
