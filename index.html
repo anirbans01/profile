@@ -42,6 +42,7 @@
     .libutton { display:inline-block; margin-top:12px; padding:8px 12px;
       background:#0A66C2; color:#fff; border-radius:14px;
       text-decoration:none; font-weight:600; }
+    .research-box { margin-top:12px; padding:10px; background:#f0f0f0; border:1px solid #ccc; border-radius:8px; text-align:center; font-weight:600; }
 
     /* main content */
     .main-content {
@@ -238,12 +239,63 @@
         I specialize in designing and delivering scalable, secure, and innovative technology solutions for complex business needs. 
       </p>
       <a class="libutton" href="https://www.linkedin.com/in/anirban-sarkar-12765b135/" target="_blank">Follow on LinkedIn</a>
+      <div class="research-box">My MTech Research on Low Resource Language</div>
     </div>
   </aside>
 
   <!-- main -->
   <main class="main-content">
     <div class="content-wrapper">
+      <div class="post" id="topic-mtech-research">
+        <h3>🔬 AUTONOMOUS MULTI-AGENT ORCHESTRATION FOR ENHANCING MACHINE TRANSLATION IN EXTREMELY LOW-RESOURCE INDIC LANGUAGES</h3>
+        <div class="meta">🔖 MTech Research, Low-Resource Languages, Machine Translation</div>
+        <p>My MTech research focuses on improving machine translation for extremely low-resource Indic languages like Assamese and Odia through innovative multi-agent AI systems.</p>
+        <div class="hidden-content">
+          <h4>The Suffering of Low-Resource Languages Due to Lack of Digital Text Corpora</h4>
+          <p>Extremely low-resource (ELR) Indic languages such as Assamese and Odia face severe challenges in neural machine translation (NMT) due to the chronic scarcity of high-quality parallel corpora. NMT quality directly correlates with the scale and diversity of training data, but these languages have significantly fewer resources compared to high-resource pairs like Hindi-English. This data scarcity leads to substantial performance gaps, where even moderate domain shifts cause dramatic degradation in translation quality.</p>
+          <p>The lack of digital text corpora manifests in multiple ways: insufficient supervision signals for robust generalization, limited variety in training examples that prevents effective interpolation for new inputs, and an inability to capture the full linguistic richness of morphologically complex languages. Synthetic data generation through back-translation, while helpful, often introduces artifacts like literal word-order structures, semantic drift, and reduced cultural naturalness, further degrading model performance.</p>
+          <p>For languages with agglutinative morphology and postpositional case systems like Assamese and Odia, these artifacts are particularly damaging. Collapsed morphological inflections, untranslated English tokens, and drifted paraphrases that don't reflect natural usage patterns compound the problem, creating a vicious cycle where poor synthetic data leads to even poorer models.</p>
+
+          <h4>Current Challenges in Machine Translation for ELR Indic Languages</h4>
+          <p>The primary challenge is data scarcity compounded by domain imbalance. Existing Indic benchmarks show consistent large performance gaps between high-resource and ELR language pairs. Even with thousands of sentence pairs, ELR models struggle with generalization, especially when encountering out-of-domain inputs.</p>
+          <p>Back-translation, the dominant augmentation strategy, introduces characteristic artifacts: word-order calques from the pivot language, collapsed verb conjugations and case markers, and semantically drifted outputs that lack cultural grounding. For morphologically rich languages, these artifacts pose severe quality issues, as critical grammatical information is lost or distorted.</p>
+          <p>Direct translation approaches suffer from extremely limited supervision, making it difficult to learn robust representations. Hardware constraints in academic settings further limit the ability to train large models, while the computational cost of generating and filtering synthetic data adds another layer of complexity.</p>
+          <p>Quality control mechanisms are inadequate; existing filtering based on cross-lingual similarity scores captures volume but not linguistic fidelity or pragmatic naturalness. This results in noisy corpora that propagate errors through the learned representations of downstream models.</p>
+
+          <h4>Objective of the Research Work</h4>
+          <p>The research aims to develop an autonomous multi-agent orchestration framework (AMAO) for quality-aware synthetic data curation in ELR Indic machine translation. The objective is to overcome data scarcity limitations by generating high-quality synthetic parallel corpora that preserve linguistic fidelity and cultural naturalness, enabling robust NMT models for Assamese and Odia.</p>
+          <p>Specific objectives include:
+          <ul>
+            <li>Implementing a four-agent system with specialized roles for translation generation, quality evaluation, correction, and decision-making</li>
+            <li>Achieving superior translation quality compared to volume-only augmentation through quality-gated curation</li>
+            <li>Leveraging Bengali-pivot transfer to exploit Indo-Aryan linguistic affinity for efficient adaptation</li>
+            <li>Demonstrating parameter-efficient fine-tuning using LoRA on constrained hardware</li>
+            <li>Evaluating improvements across multiple metrics including BLEU, ChrF, COMET, and morphological accuracy</li>
+          </ul>
+          </p>
+
+          <h4>Proposed Solution: AMAO Framework</h4>
+          <p>AMAO employs four role-specialized agents coordinated through a LangGraph state graph:
+          <ul>
+            <li><strong>Translator Agent:</strong> Uses IndicTrans2 for initial English-to-target generation</li>
+            <li><strong>Cultural Critic Agent:</strong> Evaluates for translationese, semantic drift, and morphological errors</li>
+            <li><strong>Linguistic Editor Agent:</strong> Applies targeted corrections based on critic feedback</li>
+            <li><strong>Arbiter Agent:</strong> Scores the output and issues ACCEPT, REVISE, or REJECT decisions</li>
+          </ul>
+          </p>
+          <p>The Critic, Editor, and Arbiter leverage a locally hosted Ollama LLM (qwen2.5:3b) for intelligent evaluation without cloud dependencies. A REVISE verdict triggers iterative refinement, implementing a structured debate protocol that mirrors human post-editing workflows.</p>
+
+          <h4>Methodology and Implementation</h4>
+          <p>The system uses three data categories: pivot corpus (English-Bengali), gold seed data (verified parallel pairs), and AMAO-filtered synthetic corpus. Bengali-pivot transfer fine-tunes IndicTrans2 on Bengali data first, then adapts to Assamese/Odia using LoRA adapters (rank 8, α=16).</p>
+          <p>Evaluation combines BLEU, ChrF, COMET, and morphological accuracy score (MAS) on FLORES-200 devtest split. The framework automatically detects hardware (GPU/CPU) and runs on academic constraints.</p>
+
+          <h4>Expected Outcomes and Impact</h4>
+          <p>The research expects AMAO to outperform static back-translation by producing cleaner synthetic corpora free of low-quality artifacts. This will enable more reliable NMT models for ELR Indic languages, supporting digital inclusion and preserving linguistic diversity in the NLP world.</p>
+          <p>Broader impact includes methodological contributions to multi-agent translation workflows, parameter-efficient adaptation techniques, and quality-gated synthetic data curation frameworks applicable to other low-resource language pairs.</p>
+        </div>
+        <button class="toggle-btn" onclick="toggleContent(this)">Read More</button>
+      </div>
+
       <article class="post"><h3>🚀 Welcome to my Blog</h3>
         <p>
         Here, I share my experiences and insights on various topics, 
@@ -1237,6 +1289,10 @@
     <div class="right-content">
       <span class="right-title">🔥 Top Stories</span>
       <div class="top-stories-container">
+        <div class="top-story" onclick="navigateToPost('topic-mtech-research')">
+          <h3>AUTONOMOUS MULTI-AGENT ORCHESTRATION FOR ENHANCING MACHINE TRANSLATION IN EXTREMELY LOW-RESOURCE INDIC LANGUAGES</h3>
+          <p>My MTech research on quality-aware synthetic data curation for ELR Indic languages using multi-agent AI systems.</p>
+        </div>
         <div class="top-story" onclick="navigateToPost('topic-agentic-modernization')">
           <h3>Agents for Application Modernization</h3>
           <p>How agents can map legacy application behavior and accelerate safe modernization.</p>
