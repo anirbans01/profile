@@ -23,27 +23,6 @@
     }
     body.right-collapsed { --rs: var(--right-collapsed); }
 
-    /* left sidebar */
-    .sidebar {
-      position: fixed; left: 0; top: 0;
-      width: var(--left-width); height: 100vh;
-      background: hsl(250,86%,14%); color: white;
-      padding: 20px; box-sizing: border-box;
-      overflow-y: auto; z-index: 20;
-    }
-    .sidebar img { display:block; width:140px; height:140px;
-      border-radius:50%; object-fit:cover; margin:0 auto 16px;
-      border:3px solid #fff; }
-    .sidebar h2 { text-align:center; margin:0 0 14px; font-size:1.2rem; }
-    .about-me { font-size:14px; line-height:1.5; }
-    .about-me strong {
-      color: #f1c40f;
-    }
-    .libutton { display:inline-block; margin-top:12px; padding:8px 12px;
-      background:#0A66C2; color:#fff; border-radius:14px;
-      text-decoration:none; font-weight:600; }
-    .research-link { display:inline-block; margin-top: 12px; color: #ffffff; text-decoration:none; font-weight:600; }
-    .research-link .highlight { color: #ffff99; font-weight:700; }
 
     /* main content */
     .main-content {
@@ -202,15 +181,6 @@
     .top-story h4 { margin:0 0 6px; font-size:15px; }
     .top-story p { margin:0; font-size:13px; color:#555; }
 
-    /* sidebar nav links */
-    .sidebar-nav { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; }
-    .sidebar-nav a {
-      display: block; color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;
-      padding: 7px 12px; border-radius: 8px; background: rgba(255,255,255,0.1);
-      transition: background 0.2s;
-    }
-    .sidebar-nav a:hover { background: rgba(255,255,255,0.22); }
-
     /* search bar */
     .search-container {
       position: fixed; left: 50%; transform: translateX(-50%);
@@ -238,23 +208,6 @@
     <input id="search-input" class="search-bar" placeholder="Search blog posts..." />
     <button class="search-button" onclick="performSearch()">ðŸ”</button>
   </div>
-
-  <!-- left sidebar -->
-  <aside class="sidebar">
-    <img src="anirban.jpg" alt="Anirban" />
-    <h2>Anirban Sarkar</h2>
-    <div class="about-me">
-      <p>
-        I am an <strong>Enterprise Architect</strong> with over two decades of experience. 
-        I specialize in designing and delivering scalable, secure, and innovative technology solutions for complex business needs. 
-      </p>
-      <a class="libutton" href="https://www.linkedin.com/in/anirban-sarkar-12765b135/" target="_blank">Follow on LinkedIn</a>
-      <div class="sidebar-nav">
-        <a href="#" onclick="showAllPosts(); return false;">Blog</a>
-        <a href="#" onclick="navigateToPost('topic-mtech-research'); return false;">Research</a>
-      </div>
-    </div>
-  </aside>
 
   <!-- main -->
   <main class="main-content">
