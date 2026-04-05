@@ -25,8 +25,8 @@
 
     /* left sidebar */
     .sidebar {
-      position: fixed; left: 0; top: 0;
-      width: var(--left-width); height: 100vh;
+      position: fixed; left: 0; top: 54px;
+      width: var(--left-width); height: calc(100vh - 54px);
       background: hsl(250,86%,14%); color: white;
       padding: 20px; box-sizing: border-box;
       overflow-y: auto; z-index: 20;
@@ -48,7 +48,7 @@
     /* main content */
     .main-content {
       box-sizing: border-box;
-      padding: 30px; padding-top: 80px;
+      padding: 30px; padding-top: 84px;
       margin-left: var(--left-width);
       margin-right: var(--rs);
       transition: margin-right var(--transition) ease;
@@ -82,8 +82,8 @@
 
     /* right sidebar */
     .right-sidebar {
-      position: fixed; right: 0; top: 0;
-      width: var(--rs); height: 100vh;
+      position: fixed; right: 0; top: 54px;
+      width: var(--rs); height: calc(100vh - 54px);
       background: rgba(255,255,255,0.95);
       padding: 12px 6px; box-sizing: border-box;
       overflow: hidden;
@@ -202,14 +202,27 @@
     .top-story h4 { margin:0 0 6px; font-size:15px; }
     .top-story p { margin:0; font-size:13px; color:#555; }
 
+    /* navbar */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; height: 54px;
+      background: hsl(250,86%,14%); color: #fff;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 20px; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .navbar-links { display: flex; gap: 24px; }
+    .navbar-links a {
+      color: #fff; text-decoration: none; font-size: 15px; font-weight: 600;
+      padding: 6px 10px; border-radius: 6px; transition: background 0.2s;
+    }
+    .navbar-links a:hover { background: rgba(255,255,255,0.15); }
+
     /* search bar */
     .search-container {
-      position: fixed; left: 50%; transform: translateX(-50%);
-      top: 14px; z-index: 50; width: 480px; max-width: calc(100% - 40px);
-      display:flex; background:#fff; border-radius:28px;
-      box-shadow:0 6px 18px rgba(0,0,0,0.08); overflow:hidden;
+      display: flex; background: #fff; border-radius: 28px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15); overflow: hidden;
+      width: 400px; max-width: calc(100vw - 300px);
     }
-    .search-bar { flex:1; padding:12px 16px; border:0; outline:none; }
+    .search-bar { flex:1; padding:8px 16px; border:0; outline:none; font-size: 14px; }
     .search-button { background:hsl(250,86%,14%); color:#fff; border:0; padding:0 14px; cursor:pointer; }
 
     .post { background:#fff; padding:20px; border-radius:10px; margin-bottom:20px; box-shadow:0 6px 14px rgba(0,0,0,0.06); }
@@ -224,11 +237,19 @@
 </head>
 <body>
 
-  <!-- search -->
-  <div class="search-container">
-    <input id="search-input" class="search-bar" placeholder="Search blog posts..." />
-    <button class="search-button" onclick="performSearch()">🔍</button>
-  </div>
+  <!-- navbar -->
+  <nav class="navbar">
+    <div class="navbar-links">
+      <a href="#" onclick="showAllPosts(); return false;">Blog</a>
+    </div>
+    <div class="search-container">
+      <input id="search-input" class="search-bar" placeholder="Search blog posts..." />
+      <button class="search-button" onclick="performSearch()">🔍</button>
+    </div>
+    <div class="navbar-links">
+      <a href="#" onclick="navigateToPost('topic-mtech-research'); return false;">Research</a>
+    </div>
+  </nav>
 
   <!-- left sidebar -->
   <aside class="sidebar">
@@ -1644,6 +1665,11 @@
       }
     }
     
+    // Scroll to top to show all posts
+    function showAllPosts() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
     // Navigate to post from top stories
     function navigateToPost(postId) {
       const postElement = document.getElementById(postId);
