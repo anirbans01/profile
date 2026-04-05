@@ -27,7 +27,7 @@
     /* main content */
     .main-content {
       box-sizing: border-box;
-      padding: 30px; padding-top: 80px;
+      padding: 30px; padding-top: 30px;
       margin-left: 0;
       margin-right: var(--rs);
       transition: margin-right var(--transition) ease;
@@ -183,13 +183,13 @@
 
     /* search bar */
     .search-container {
-      position: fixed; left: 50%; transform: translateX(-50%);
-      top: 14px; z-index: 50; width: 480px; max-width: calc(100% - 40px);
+      position: sticky; top: 0; z-index: 50;
       display: flex; background: #fff; border-radius: 28px;
       box-shadow: 0 6px 18px rgba(0,0,0,0.08); overflow: hidden;
+      width: 100%; max-width: 560px; margin: 0 auto 24px;
     }
-    .search-bar { flex:1; padding:12px 16px; border:0; outline:none; }
-    .search-button { background:hsl(250,86%,14%); color:#fff; border:0; padding:0 14px; cursor:pointer; }
+    .search-bar { flex:1; padding:12px 16px; border:0; outline:none; font-size: 15px; }
+    .search-button { background:hsl(250,86%,14%); color:#fff; border:0; padding:0 18px; cursor:pointer; font-size: 16px; }
 
     .post { background:#fff; padding:20px; border-radius:10px; margin-bottom:20px; box-shadow:0 6px 14px rgba(0,0,0,0.06); }
     .post h3 { margin-top:0; color:#2c3e50; }
@@ -197,21 +197,18 @@
     @media(max-width:900px){
       .right-sidebar{ display:none; }
       .main-content{ margin-right:0; }
-      .search-container{ width:90%; }
     }
   </style>
 </head>
 <body>
 
-  <!-- search -->
-  <div class="search-container">
-    <input id="search-input" class="search-bar" placeholder="Search blog posts..." />
-    <button class="search-button" onclick="performSearch()">🔍</button>
-  </div>
-
   <!-- main -->
   <main class="main-content">
     <div class="content-wrapper">
+      <div class="search-container">
+        <input id="search-input" class="search-bar" placeholder="Search blog posts..." />
+        <button class="search-button" onclick="performSearch()">🔍</button>
+      </div>
       <div class="post"><h3>🚀 Welcome to my Blog</h3>
         <p>
         Here, I share my experiences and insights on various topics, 
@@ -1576,51 +1573,44 @@
       btn.textContent = collapsed ? '❯' : '❮';
     }
 
-    function performSearch1(){
-      const q = document.getElementById('search-input').value.toLowerCase();
-      const posts = document.querySelectorAll('.post');
-      let found = false;
-      posts.forEach(p=>{
-        if(p.textContent.toLowerCase().includes(q)){
-          p.scrollIntoView({behavior:'smooth', block:'center'});
-          p.style.border='2px solid #1abc9c'; found=true;
-        } else { p.style.border=''; }
-      });
-      if(!found) alert('No results found: '+q);
-    }
     // Search functionality
     function performSearch() {
       const searchTerm = document.getElementById('search-input').value.toLowerCase().trim();
-      
-      if (searchTerm === '') {
-        alert('Please enter a search term');
-        return;
-      }
-      
-      // Simple search implementation - highlights matching text
       const posts = document.querySelectorAll('.post');
-      let found = false;
-      
+
+      // Clear previous highlights
+      posts.forEach(p => { p.style.border = ''; p.style.boxShadow = ''; });
+
+      if (searchTerm === '') return;
+
+      let firstMatch = null;
+      let matchCount = 0;
+
       posts.forEach(post => {
-        const text = post.textContent.toLowerCase();
-        if (text.includes(searchTerm)) {
+        if (post.textContent.toLowerCase().includes(searchTerm)) {
           post.style.border = '2px solid #1abc9c';
-          post.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          found = true;
-        } else {
-          post.style.border = '';
+          post.style.boxShadow = '0 0 0 4px rgba(26,188,156,0.15)';
+          if (!firstMatch) firstMatch = post;
+          matchCount++;
         }
       });
-      
-      if (!found) {
+
+      if (firstMatch) {
+        firstMatch.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
         alert('No results found for: ' + searchTerm);
       }
     }
-    
+
     // Allow pressing Enter to search
     document.getElementById('search-input').addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') {
-        performSearch();
+      if (e.key === 'Enter') performSearch();
+    });
+
+    // Clear highlights when search is cleared
+    document.getElementById('search-input').addEventListener('input', function() {
+      if (this.value === '') {
+        document.querySelectorAll('.post').forEach(p => { p.style.border = ''; p.style.boxShadow = ''; });
       }
     });
     
