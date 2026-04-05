@@ -218,6 +218,58 @@
         covering technology strategy, cloud computing, and artificial intelligence. Stay tuned for regular updates!
       </p>
       </div>
+
+    <div class="post" id="topic-attention-mechanisms-llm">
+      <h3>🧠 Multi-Head Attention, Causal Attention, and Cross-Attention in LLMs</h3>
+      <div class="meta">🔖 LLMs, Transformers, Attention Mechanisms, Deep Learning</div>
+      <p>Attention mechanisms are the architectural heart of modern Large Language Models. Understanding the differences between Multi-Head Attention, Causal Attention, and Cross-Attention is key to understanding how LLMs read, generate, and reason over text.</p>
+      <div class="hidden-content">
+
+        <h4>Why Attention Matters</h4>
+        <p>Before transformers, sequence models like RNNs processed tokens one at a time, struggling to relate words that were far apart in a sentence. Attention mechanisms solved this by allowing every token to directly "look at" every other token in the sequence simultaneously, computing a relevance score between them. This parallel, global view of the sequence is what makes transformers so powerful — and attention is the mechanism that makes it possible.</p>
+
+        <h4>Multi-Head Attention (MHA)</h4>
+        <p>Multi-Head Attention is the foundational attention mechanism in transformers. Instead of computing a single attention function, MHA runs multiple attention computations — called "heads" — in parallel, each learning to attend to different aspects of the input. One head might focus on syntactic relationships (subject-verb agreement), while another captures semantic similarity, and yet another tracks long-range dependencies.</p>
+        <p>Each head independently projects the input into Query (Q), Key (K), and Value (V) matrices using learned weight matrices. The attention score between tokens is computed as:</p>
+        <p><strong>Attention(Q, K, V) = softmax(QKᵀ / √dₖ) · V</strong></p>
+        <p>The scaling factor √dₖ (square root of the key dimension) prevents dot products from growing too large, which would push softmax into regions with very small gradients. The outputs of all heads are then concatenated and projected back to the original dimension. This multi-perspective view gives the model a richer representation of each token in context.</p>
+        <p>In encoder-only models like BERT, every token can attend to every other token — both left and right — making it ideal for understanding tasks like classification and named entity recognition.</p>
+
+        <h4>Causal Attention (Masked Self-Attention)</h4>
+        <p>Causal Attention, also called Masked Self-Attention, is the variant used in decoder-only language models like GPT. The core difference from standard MHA is a constraint: each token can only attend to itself and tokens that came before it — never to future tokens. This is enforced by applying a causal mask that sets attention scores for future positions to negative infinity before the softmax, effectively zeroing them out.</p>
+        <p>This masking is essential for autoregressive generation. When an LLM generates text token by token, it must produce each next token based only on what it has already generated — it cannot "cheat" by looking at what comes next. The causal mask enforces this constraint during training, ensuring the model learns to predict each token from its left context alone.</p>
+        <p>The result is a model that is excellent at text generation, completion, and reasoning tasks where output is produced sequentially. GPT-2, GPT-3, GPT-4, LLaMA, Mistral, and most modern chat models are all built on causal attention in their decoder stacks.</p>
+        <p>An important nuance: causal attention still computes attention across the entire available context window (which can be 128K tokens or more in modern models). The constraint is directional — past only — not distance-limited. This is why models can maintain coherent reasoning across very long documents.</p>
+
+        <h4>Cross-Attention</h4>
+        <p>Cross-Attention is used when a model needs to attend to a different sequence than the one it is currently processing. It is the bridge between two separate information streams. The Queries (Q) come from one sequence (e.g., the decoder's current state), while the Keys (K) and Values (V) come from another sequence (e.g., the encoder's output).</p>
+        <p>This is the mechanism that powers the encoder-decoder architecture, originally used in machine translation (the original "Attention Is All You Need" paper). The encoder reads and encodes the source language sentence into a rich contextual representation. The decoder then uses cross-attention to focus on the relevant parts of that encoded representation while generating each target language token.</p>
+        <p>For example, when translating "The cat sat on the mat" to French, when generating the word "chat" (cat), the cross-attention mechanism will assign high attention weights to the encoded representation of "cat" in the source, guiding the decoder to produce the correct translation.</p>
+        <p>Cross-attention also appears in modern multimodal models. In models like Flamingo or LLaVA, the language decoder uses cross-attention to attend to image patch embeddings produced by a vision encoder, allowing the model to ground its language generation in visual context. Similarly, text-to-image models use cross-attention to condition image generation on text prompt embeddings.</p>
+
+        <h4>How They Work Together in Practice</h4>
+        <p>In a classic encoder-decoder transformer:</p>
+        <ul style="margin: 8px 0 12px 20px; line-height: 1.8;">
+          <li>The <strong>encoder</strong> uses bidirectional Multi-Head Self-Attention to build rich contextual representations of the input.</li>
+          <li>The <strong>decoder</strong> first applies Causal (masked) Self-Attention to its own generated tokens, then applies Cross-Attention to the encoder output to pull in relevant source information before producing the next token.</li>
+        </ul>
+        <p>In decoder-only models (GPT-style), only Causal Attention is used — there is no encoder, and the entire context (prompt + generation so far) is processed in a single masked self-attention stack. This architectural simplicity, combined with scale, is what makes GPT-style models so effective.</p>
+
+        <h4>Key Differences at a Glance</h4>
+        <ul style="margin: 8px 0 12px 20px; line-height: 1.8;">
+          <li><strong>Multi-Head Attention:</strong> Attends to all tokens in both directions; used in encoders; ideal for understanding tasks.</li>
+          <li><strong>Causal Attention:</strong> Attends only to past tokens; used in decoders and generative models; essential for autoregressive generation.</li>
+          <li><strong>Cross-Attention:</strong> Q from one sequence, K and V from another; bridges encoder and decoder; enables multimodal grounding.</li>
+        </ul>
+
+        <h4>Why This Matters for LLM Engineering</h4>
+        <p>Understanding these mechanisms has direct practical implications. Causal attention's left-only context explains why prompt placement matters — context provided earlier in a prompt is always visible, making it more reliable than context appended later in complex chains. Cross-attention's design explains how RAG (Retrieval-Augmented Generation) systems can be built — retrieved documents are encoded and attended to by the generation model. And the quadratic complexity of attention (O(n²) in sequence length) explains why efficient attention variants like FlashAttention, Sliding Window Attention, and Ring Attention exist — they make long-context models tractable at scale.</p>
+        <p>As LLMs grow more capable and multimodal, attention mechanisms continue to evolve. But Multi-Head, Causal, and Cross-Attention remain the three foundational patterns that every modern LLM architecture is built upon.</p>
+
+      </div>
+      <button class="toggle-btn" onclick="toggleContent(this)">Read More</button>
+    </div>
+
     <div class="post" id="topic-agents-reshaping-sdlc">
       <h3>🤖 How Agents Are Reshaping the Software Development Lifecycle</h3>
       <div class="meta">🔖 SDLC, Agents, Development Automation</div>
@@ -1319,6 +1371,10 @@
     <div class="right-content">
       <span class="right-title">🔥 Top Stories</span>
       <div class="top-stories-container">
+        <div class="top-story" onclick="navigateToPost('topic-attention-mechanisms-llm')">
+          <h3>Multi-Head Attention, Causal Attention, and Cross-Attention in LLMs</h3>
+          <p>Understanding the three foundational attention patterns that power every modern Large Language Model.</p>
+        </div>
         <a class="top-story" href="research.html" onclick="navigateToResearch(); return false;" style="display:block; text-decoration:none; color:inherit;">
           <h3>Autonomous multi-agent orchestration for enhancing machine translation in extremely low-resource Indic languages</h3>
           <p>My MTech research on quality-aware synthetic data curation for ELR Indic languages using multi-agent AI systems.</p>
