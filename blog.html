@@ -1319,12 +1319,10 @@
     <div class="right-content">
       <span class="right-title">🔥 Top Stories</span>
       <div class="top-stories-container">
-        <div class="top-story">
-          <a href="research.html" style="text-decoration:none; color:inherit; display:block;">
-            <h3>Autonomous multi-agent orchestration for enhancing machine translation in extremely low-resource Indic languages</h3>
-            <p>My MTech research on quality-aware synthetic data curation for ELR Indic languages using multi-agent AI systems.</p>
-          </a>
-        </div>
+        <a class="top-story" href="research.html" onclick="navigateToResearch(); return false;" style="display:block; text-decoration:none; color:inherit;">
+          <h3>Autonomous multi-agent orchestration for enhancing machine translation in extremely low-resource Indic languages</h3>
+          <p>My MTech research on quality-aware synthetic data curation for ELR Indic languages using multi-agent AI systems.</p>
+        </a>
         <div class="top-story" onclick="navigateToPost('topic-agents-reshaping-sdlc')">
           <h3>How Agents Are Reshaping the SDLC</h3>
           <p>Autonomous agents are transforming every phase of software development—from code generation to deployment automation.</p>
@@ -1585,6 +1583,10 @@
     }
     
     // Scroll to top to show all posts
+    function navigateToResearch() {
+      window.location.assign('research.html');
+    }
+
     function showAllPosts() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
