@@ -242,6 +242,29 @@
       </div>
     </section>
 
+    <section class="card" style="margin-top: 30px;">
+      <div class="section-title"><span>Background &amp; Motivation</span></div>
+      <p>My MTech research focuses on improving machine translation for extremely low-resource Indic languages like Assamese and Odia through innovative multi-agent AI systems.</p>
+
+      <h4 style="margin: 20px 0 8px; color: var(--accent-2);">The Suffering of Low-Resource Languages Due to Lack of Digital Text Corpora</h4>
+      <p>Extremely low-resource (ELR) Indic languages such as Assamese and Odia face severe challenges in neural machine translation (NMT) due to the chronic scarcity of high-quality parallel corpora. NMT quality directly correlates with the scale and diversity of training data, but these languages have significantly fewer resources compared to high-resource pairs like Hindi-English. This data scarcity leads to substantial performance gaps, where even moderate domain shifts cause dramatic degradation in translation quality.</p>
+      <p>The lack of digital text corpora manifests in multiple ways: insufficient supervision signals for robust generalization, limited variety in training examples that prevents effective interpolation for new inputs, and an inability to capture the full linguistic richness of morphologically complex languages. Synthetic data generation through back-translation, while helpful, often introduces artifacts like literal word-order structures, semantic drift, and reduced cultural naturalness, further degrading model performance.</p>
+      <p>For languages with agglutinative morphology and postpositional case systems like Assamese and Odia, these artifacts are particularly damaging. Collapsed morphological inflections, untranslated English tokens, and drifted paraphrases that don't reflect natural usage patterns compound the problem, creating a vicious cycle where poor synthetic data leads to even poorer models.</p>
+
+      <h4 style="margin: 20px 0 8px; color: var(--accent-2);">Current Challenges in Machine Translation for ELR Indic Languages</h4>
+      <p>The primary challenge is data scarcity compounded by domain imbalance. Existing Indic benchmarks show consistent large performance gaps between high-resource and ELR language pairs. Even with thousands of sentence pairs, ELR models struggle with generalization, especially when encountering out-of-domain inputs.</p>
+      <p>Back-translation, the dominant augmentation strategy, introduces characteristic artifacts: word-order calques from the pivot language, collapsed verb conjugations and case markers, and semantically drifted outputs that lack cultural grounding. For morphologically rich languages, these artifacts pose severe quality issues, as critical grammatical information is lost or distorted.</p>
+      <p>Direct translation approaches suffer from extremely limited supervision, making it difficult to learn robust representations. Hardware constraints in academic settings further limit the ability to train large models, while the computational cost of generating and filtering synthetic data adds another layer of complexity.</p>
+      <p>Quality control mechanisms are inadequate; existing filtering based on cross-lingual similarity scores captures volume but not linguistic fidelity or pragmatic naturalness. This results in noisy corpora that propagate errors through the learned representations of downstream models.</p>
+
+      <h4 style="margin: 20px 0 8px; color: var(--accent-2);">Objective of the Research Work</h4>
+      <p>The research aims to develop an autonomous multi-agent orchestration framework (AMAO) for quality-aware synthetic data curation in ELR Indic machine translation. The objective is to overcome data scarcity limitations by generating high-quality synthetic parallel corpora that preserve linguistic fidelity and cultural naturalness, enabling robust NMT models for low-resource Indic languages like Assamese and Odia.</p>
+
+      <h4 style="margin: 20px 0 8px; color: var(--accent-2);">Expected Outcomes and Impact</h4>
+      <p>The research expects AMAO to outperform static back-translation by producing cleaner synthetic corpora free of low-quality artifacts. This will enable more reliable NMT models for ELR Indic languages, supporting digital inclusion and preserving linguistic diversity in the NLP world.</p>
+      <p>Broader impact includes methodological contributions to multi-agent translation workflows, parameter-efficient adaptation techniques, and quality-gated synthetic data curation frameworks applicable to other low-resource language pairs.</p>
+    </section>
+
     <div class="grid grid-2" style="margin-top: 30px;">
       <article class="card">
         <div class="section-title"><span>Project Snapshot</span><span class="pill">In Progress</span></div>
