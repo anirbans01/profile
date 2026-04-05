@@ -25,8 +25,8 @@
 
     /* left sidebar */
     .sidebar {
-      position: fixed; left: 0; top: 54px;
-      width: var(--left-width); height: calc(100vh - 54px);
+      position: fixed; left: 0; top: 0;
+      width: var(--left-width); height: 100vh;
       background: hsl(250,86%,14%); color: white;
       padding: 20px; box-sizing: border-box;
       overflow-y: auto; z-index: 20;
@@ -48,7 +48,7 @@
     /* main content */
     .main-content {
       box-sizing: border-box;
-      padding: 30px; padding-top: 84px;
+      padding: 30px; padding-top: 80px;
       margin-left: var(--left-width);
       margin-right: var(--rs);
       transition: margin-right var(--transition) ease;
@@ -82,8 +82,8 @@
 
     /* right sidebar */
     .right-sidebar {
-      position: fixed; right: 0; top: 54px;
-      width: var(--rs); height: calc(100vh - 54px);
+      position: fixed; right: 0; top: 0;
+      width: var(--rs); height: 100vh;
       background: rgba(255,255,255,0.95);
       padding: 12px 6px; box-sizing: border-box;
       overflow: hidden;
@@ -202,27 +202,23 @@
     .top-story h4 { margin:0 0 6px; font-size:15px; }
     .top-story p { margin:0; font-size:13px; color:#555; }
 
-    /* navbar */
-    .navbar {
-      position: fixed; top: 0; left: 0; right: 0; height: 54px;
-      background: #f5f5f0; color: #222;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 20px; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    /* sidebar nav links */
+    .sidebar-nav { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; }
+    .sidebar-nav a {
+      display: block; color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;
+      padding: 7px 12px; border-radius: 8px; background: rgba(255,255,255,0.1);
+      transition: background 0.2s;
     }
-    .navbar-links { display: flex; gap: 24px; }
-    .navbar-links a {
-      color: hsl(250,86%,14%); text-decoration: none; font-size: 15px; font-weight: 600;
-      padding: 6px 10px; border-radius: 6px; transition: background 0.2s;
-    }
-    .navbar-links a:hover { background: rgba(0,0,0,0.07); }
+    .sidebar-nav a:hover { background: rgba(255,255,255,0.22); }
 
     /* search bar */
     .search-container {
+      position: fixed; left: 50%; transform: translateX(-50%);
+      top: 14px; z-index: 50; width: 480px; max-width: calc(100% - 40px);
       display: flex; background: #fff; border-radius: 28px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15); overflow: hidden;
-      width: 400px; max-width: calc(100vw - 300px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08); overflow: hidden;
     }
-    .search-bar { flex:1; padding:8px 16px; border:0; outline:none; font-size: 14px; }
+    .search-bar { flex:1; padding:12px 16px; border:0; outline:none; }
     .search-button { background:hsl(250,86%,14%); color:#fff; border:0; padding:0 14px; cursor:pointer; }
 
     .post { background:#fff; padding:20px; border-radius:10px; margin-bottom:20px; box-shadow:0 6px 14px rgba(0,0,0,0.06); }
@@ -237,18 +233,11 @@
 </head>
 <body>
 
-  <!-- navbar -->
-  <nav class="navbar">
-    <div></div>
-    <div class="search-container">
-      <input id="search-input" class="search-bar" placeholder="Search blog posts..." />
-      <button class="search-button" onclick="performSearch()">🔍</button>
-    </div>
-    <div class="navbar-links">
-      <a href="#" onclick="showAllPosts(); return false;">Blog</a>
-      <a href="#" onclick="navigateToPost('topic-mtech-research'); return false;">Research</a>
-    </div>
-  </nav>
+  <!-- search -->
+  <div class="search-container">
+    <input id="search-input" class="search-bar" placeholder="Search blog posts..." />
+    <button class="search-button" onclick="performSearch()">🔍</button>
+  </div>
 
   <!-- left sidebar -->
   <aside class="sidebar">
@@ -260,8 +249,10 @@
         I specialize in designing and delivering scalable, secure, and innovative technology solutions for complex business needs. 
       </p>
       <a class="libutton" href="https://www.linkedin.com/in/anirban-sarkar-12765b135/" target="_blank">Follow on LinkedIn</a>
-      <div style="height: 22px;"></div>
-      <a class="research-link" href="#" onclick="navigateToPost('topic-mtech-research')">My <span class="highlight">Research</span> work on Indic Low Resource Languages</a>
+      <div class="sidebar-nav">
+        <a href="#" onclick="showAllPosts(); return false;">Blog</a>
+        <a href="#" onclick="navigateToPost('topic-mtech-research'); return false;">Research</a>
+      </div>
     </div>
   </aside>
 
