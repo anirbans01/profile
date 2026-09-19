@@ -3,74 +3,136 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>My Blogging Site</title>
+  <title>Anirban Sarkar</title>
   <link rel="icon" type="image/png" href="anirban.jpg">
-
+  <link rel="stylesheet" href="theme.css">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    .hero {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 40px;
+      align-items: center;
+      padding: 44px;
+    }
+    .hero-avatar {
+      width: 168px; height: 168px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--border);
+      box-shadow: 0 0 0 8px var(--accent-soft);
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--accent-2);
+      margin-bottom: 14px;
+    }
+    .hero h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      letter-spacing: -0.03em;
+    }
+    .hero p.lede {
+      max-width: 640px;
+      margin: 0 0 22px;
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
 
-    :root { --left-width: 220px; }
-
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f8f9fa;
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      margin-top: 28px;
+    }
+    .grid .card {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text);
+      transition: transform 0.15s ease, border-color 0.15s ease;
+    }
+    .grid .card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+    }
+    .grid .card h2 { margin: 0; font-size: 1.25rem; }
+    .grid .card p { margin: 0; color: var(--text-muted); font-size: 0.95rem; }
+    .grid .card .go {
+      margin-top: auto;
+      color: var(--accent-2);
+      font-weight: 600;
+      font-size: 0.9rem;
     }
 
-    .sidebar {
-      position: fixed; left: 0; top: 0;
-      width: var(--left-width); height: 100vh;
-      background: hsl(250,86%,14%); color: white;
-      padding: 20px; box-sizing: border-box;
-      overflow-y: auto; z-index: 20;
-    }
-    .sidebar img { display:block; width:140px; height:140px;
-      border-radius:50%; object-fit:cover; margin:0 auto 16px;
-      border:3px solid #fff; }
-    .sidebar h2 { text-align:center; margin:0 0 14px; font-size:1.2rem; }
-    .about-me { font-size:14px; line-height:1.5; }
-    .about-me strong { color: #f1c40f; }
-    .libutton { display:inline-block; margin-top:12px; padding:8px 12px;
-      background:#0A66C2; color:#fff; border-radius:14px;
-      text-decoration:none; font-weight:600; }
-
-    .sidebar-nav { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; }
-    .sidebar-nav a {
-      display: block; color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;
-      padding: 7px 12px; border-radius: 8px; background: rgba(255,255,255,0.1);
-      transition: background 0.2s;
-    }
-    .sidebar-nav a:hover { background: rgba(255,255,255,0.22); }
-
-    .content-frame {
-      position: fixed;
-      left: var(--left-width); top: 0;
-      width: calc(100% - var(--left-width));
-      height: 100vh;
-      border: none;
+    @media (max-width: 720px) {
+      .hero { grid-template-columns: 1fr; text-align: center; padding: 32px 22px; }
+      .hero-avatar { margin: 0 auto; }
+      .hero-actions { justify-content: center; }
+      .grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <!-- left sidebar -->
-  <aside class="sidebar">
-    <img src="anirban.jpg" alt="Anirban" />
-    <h2>Anirban Sarkar</h2>
-    <div class="about-me">
-      <p>
-        I am an <strong>Enterprise Architect</strong> with over two decades of experience.
-        I specialize in designing and delivering scalable, secure, and innovative technology solutions for complex business needs.
-      </p>
-      <a class="libutton" href="https://www.linkedin.com/in/anirban-sarkar-12765b135/" target="_blank">Follow on LinkedIn</a>
-      <div class="sidebar-nav">
-        <a href="blog.html" target="content-frame">Blog</a>
-        <a href="research.html" target="content-frame">Research</a>
-      </div>
+  <header class="site-nav">
+    <div class="nav-inner">
+      <a class="brand" href="index.html">
+        <img src="anirban.jpg" alt="" class="brand-avatar" />
+        <span>Anirban Sarkar</span>
+      </a>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+      <label for="nav-toggle" class="nav-burger" aria-label="Toggle menu"><span></span></label>
+      <nav class="nav-links">
+        <a href="index.html" class="active">Home</a>
+        <a href="blog.html">Blog</a>
+        <a href="research.html">Research</a>
+        <a class="nav-cta" href="https://www.linkedin.com/in/anirban-sarkar-12765b135/" target="_blank" rel="noopener">LinkedIn</a>
+      </nav>
     </div>
-  </aside>
+  </header>
 
-  <!-- content iframe -->
-  <iframe name="content-frame" class="content-frame" src="blog.html"></iframe>
+  <main class="page">
+    <section class="hero card">
+      <img class="hero-avatar" src="anirban.jpg" alt="Anirban Sarkar" />
+      <div>
+        <span class="eyebrow">Enterprise Architect</span>
+        <h1>Anirban Sarkar</h1>
+        <p class="lede">
+          Enterprise Architect with over two decades of experience designing and delivering scalable,
+          secure, and innovative technology solutions for complex business needs — with a current focus
+          on agentic AI, AIOps, and production-grade LLM systems.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="blog.html">Read the Blog</a>
+          <a class="btn btn-ghost" href="research.html">View Research</a>
+          <a class="btn btn-ghost" href="https://www.linkedin.com/in/anirban-sarkar-12765b135/" target="_blank" rel="noopener">Connect on LinkedIn</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="grid">
+      <a class="card" href="blog.html">
+        <h2>📝 Blog</h2>
+        <p>Notes and deep dives on technology strategy, cloud computing, agentic AI, and AIOps.</p>
+        <span class="go">Browse posts →</span>
+      </a>
+      <a class="card" href="research.html">
+        <h2>🔬 Research</h2>
+        <p>Autonomous multi-agent orchestration for enhancing machine translation in extremely low-resource Indic languages.</p>
+        <span class="go">Read the summary →</span>
+      </a>
+    </div>
+  </main>
+
+  <footer class="site-footer">&copy; <span id="year"></span> Anirban Sarkar</footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 
 </body>
 </html>

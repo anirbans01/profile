@@ -3,22 +3,18 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>My Blogging Site</title>
+  <title>Blog | Anirban Sarkar</title>
   <link rel="icon" type="image/png" href="anirban.jpg">
+  <link rel="stylesheet" href="theme.css">
 
   <style>
     :root {
-      --left-width: 220px;
-      --right-width: 300px;   /* expanded */
+      --right-width: 320px;   /* expanded */
       --right-collapsed: 40px;/* collapsed keeps toggle visible */
       --transition: 300ms;
     }
 
     body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f8f9fa;
-      color: #222;
       --rs: var(--right-width);
     }
     body.right-collapsed { --rs: var(--right-collapsed); }
@@ -38,21 +34,22 @@
 
     /* Toggle Button */
     .toggle-btn {
-      background: hsl(250, 86%, 14%);
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
       color: white;
       border: none;
-      padding: 8px 15px;
-      border-radius: 5px;
+      padding: 8px 16px;
+      border-radius: 999px;
       cursor: pointer;
       margin-top: 10px;
       font-size: 14px;
-      transition: background 0.3s;
+      font-weight: 600;
+      transition: filter 0.2s;
     }
-    
+
     .toggle-btn:hover {
-      background: hsl(227, 70%, 53%);
+      filter: brightness(1.1);
     }
-    
+
     /* Hidden content */
     .hidden-content {
       display: none;
@@ -63,7 +60,8 @@
     .right-sidebar {
       position: fixed; right: 0; top: 0;
       width: var(--rs); height: 100vh;
-      background: rgba(255,255,255,0.95);
+      background: var(--surface);
+      border-left: 1px solid var(--border);
       padding: 12px 6px; box-sizing: border-box;
       overflow: hidden;
       transition: width var(--transition) ease, padding var(--transition) ease;
@@ -75,7 +73,7 @@
     .collapse-btn {
       width: 36px; height: 36px;
       border-radius: 50%; border: none;
-      background: hsl(250,86%,14%); color: #fff;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff;
       display:flex; align-items:center; justify-content:center;
       cursor:pointer; margin-bottom: 10px;
       transition: transform var(--transition);
@@ -86,76 +84,77 @@
     .right-sidebar h2 {
       text-align: center;
       margin-top: 0;
-      color: hsl(250, 86%, 14%);
-      border-bottom: 2px solid hsl(250, 86%, 14%);
+      color: var(--text);
+      border-bottom: 2px solid var(--border);
       padding-bottom: 10px;
       font-size: 1.3em;
       flex-shrink: 0; /* Prevent title from shrinking */
     }
-    
+
     .top-stories-container {
       flex: 1;
-      color: hsl(250, 86%, 14%);
+      color: var(--text);
       overflow-y: auto;
       padding-right: 5px;
       margin-top: 10px;
       max-height: calc(100vh - 150px); /* Limit height and enable scrolling */
     }
-    
+
     /* Custom scrollbar for top stories */
     .top-stories-container::-webkit-scrollbar {
       width: 8px;
     }
-    
+
     .top-stories-container::-webkit-scrollbar-track {
-      background: lab(24.02% 23.09 -47.04 / 0.102);
-      
+      background: rgba(255, 255, 255, 0.04);
       border-radius: 4px;
     }
-    
+
     .top-stories-container::-webkit-scrollbar-thumb {
-      background: hsl(238, 82%, 24%);
+      background: var(--surface-hover);
       border-radius: 4px;
     }
-    
+
     .top-stories-container::-webkit-scrollbar-thumb:hover {
-      background: hwb(226 31% 6%);
+      background: var(--accent);
     }
-    
+
     .top-story {
-      /* background: lch(69.32% 1.65 290.38 / 0.102); */
-      background: lab(89.61% 0.55 -1.47);
-      border-radius: 8px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
       padding: 15px;
       margin-bottom: 15px;
-      transition: transform 0.2s;
+      transition: transform 0.2s, border-color 0.2s;
       cursor: pointer;
     }
-    
+
     .top-story:hover {
       transform: translateY(-3px);
-      background: rgba(255, 255, 255, 0.15);
+      border-color: var(--accent);
     }
-    
+
     .top-story h3 {
       margin-top: 0;
       font-size: 16px;
       line-height: 1.3;
+      color: var(--text);
     }
-    
+
     .top-story p {
       font-size: 14px;
       line-height: 1.4;
       margin-bottom: 10px;
+      color: var(--text-muted);
     }
-    
+
     .top-story .meta {
       font-size: 12px;
-      color: #bdc3c7;
+      color: var(--text-muted);
     }
-    
+
     /* fade section */
-    .right-content { 
+    .right-content {
       flex:1;
       width: 100%;
       opacity: 1;
@@ -167,40 +166,55 @@
     }
 
     .right-title {
-      font-weight:700; color:hsl(250,86%,14%);
-      border-bottom:2px solid hsl(250,86%,14%);
+      font-weight:700; color:var(--text);
+      border-bottom:2px solid var(--border);
       margin-bottom:10px; padding-bottom:5px;
       text-align:center;
     }
     .top-stories { overflow-y:auto; }
-    .top-story {
-      background:#fff; padding:12px; margin-bottom:10px;
-      border-radius:8px; box-shadow:0 1px 3px rgba(0,0,0,0.06);
-      cursor:pointer;
-    }
-    .top-story h4 { margin:0 0 6px; font-size:15px; }
-    .top-story p { margin:0; font-size:13px; color:#555; }
 
     /* search bar */
     .search-container {
-      position: sticky; top: 0; z-index: 50;
-      display: flex; background: #fff; border-radius: 28px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.08); overflow: hidden;
+      position: sticky; top: 76px; z-index: 50;
+      display: flex; background: var(--surface); border: 1px solid var(--border); border-radius: 28px;
+      box-shadow: var(--shadow); overflow: hidden;
       width: 100%; max-width: 560px; margin: 0 auto 24px;
     }
-    .search-bar { flex:1; padding:12px 16px; border:0; outline:none; font-size: 15px; }
-    .search-button { background:hsl(250,86%,14%); color:#fff; border:0; padding:0 18px; cursor:pointer; font-size: 16px; }
+    .search-bar { flex:1; padding:12px 16px; border:0; outline:none; font-size: 15px; background: transparent; color: var(--text); }
+    .search-bar::placeholder { color: var(--text-muted); }
+    .search-button { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color:#fff; border:0; padding:0 18px; cursor:pointer; font-size: 16px; }
 
-    .post { background:#fff; padding:20px; border-radius:10px; margin-bottom:20px; box-shadow:0 6px 14px rgba(0,0,0,0.06); }
-    .post h3 { margin-top:0; color:#2c3e50; }
+    .post { background: var(--surface); border: 1px solid var(--border); padding:20px; border-radius: var(--radius-md); margin-bottom:20px; box-shadow: var(--shadow); }
+    .post h3 { margin-top:0; color: var(--text); }
+    .post .meta { color: var(--accent-2); font-size: 13px; }
+    .post h4 { color: var(--text); }
+    .post p, .post li { color: var(--text-muted); }
 
     @media(max-width:900px){
       .right-sidebar{ display:none; }
       .main-content{ margin-right:0; }
+      .search-container{ top: 0; }
     }
   </style>
 </head>
 <body>
+
+  <header class="site-nav">
+    <div class="nav-inner">
+      <a class="brand" href="index.html">
+        <img src="anirban.jpg" alt="" class="brand-avatar" />
+        <span>Anirban Sarkar</span>
+      </a>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+      <label for="nav-toggle" class="nav-burger" aria-label="Toggle menu"><span></span></label>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="blog.html" class="active">Blog</a>
+        <a href="research.html">Research</a>
+        <a class="nav-cta" href="https://www.linkedin.com/in/anirban-sarkar-12765b135/" target="_blank" rel="noopener">LinkedIn</a>
+      </nav>
+    </div>
+  </header>
 
   <!-- main -->
   <main class="main-content">
@@ -1588,8 +1602,8 @@
 
       posts.forEach(post => {
         if (post.textContent.toLowerCase().includes(searchTerm)) {
-          post.style.border = '2px solid #1abc9c';
-          post.style.boxShadow = '0 0 0 4px rgba(26,188,156,0.15)';
+          post.style.border = '2px solid #7c6cf6';
+          post.style.boxShadow = '0 0 0 4px rgba(124,108,246,0.2)';
           if (!firstMatch) firstMatch = post;
           matchCount++;
         }
@@ -1644,7 +1658,7 @@
         postElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
         
         // Add a highlight effect
-        postElement.style.boxShadow = '0 0 0 3px #1abc9c';
+        postElement.style.boxShadow = '0 0 0 3px #7c6cf6';
         setTimeout(() => {
           postElement.style.boxShadow = '';
         }, 2000);
