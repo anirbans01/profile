@@ -55,6 +55,7 @@
       display: none;
       margin-top: 15px;
     }
+    .hidden-content.is-expanded { display: block; }
 
     /* right sidebar */
     .right-sidebar {
@@ -1695,11 +1696,12 @@
     
     // Toggle content functionality
     function toggleContent(button) {
-      const hiddenContent = button.previousElementSibling;
-      if (!hiddenContent || !hiddenContent.classList.contains('hidden-content')) return;
-      const isHidden = window.getComputedStyle(hiddenContent).display === 'none';
-      hiddenContent.style.display = isHidden ? 'block' : 'none';
-      button.textContent = isHidden ? 'Read Less' : 'Read More';
+      const post = button.closest('.post');
+      const hiddenContent = post ? post.querySelector('.hidden-content') : null;
+      if (!hiddenContent) return;
+      const shouldExpand = !hiddenContent.classList.contains('is-expanded');
+      hiddenContent.classList.toggle('is-expanded', shouldExpand);
+      button.textContent = shouldExpand ? 'Read Less' : 'Read More';
     }
     
     // Scroll to top to show all posts
