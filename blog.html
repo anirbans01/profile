@@ -1696,15 +1696,10 @@
     // Toggle content functionality
     function toggleContent(button) {
       const hiddenContent = button.previousElementSibling;
-      const isHidden = hiddenContent.style.display === 'none';
-      
-      if (isHidden) {
-        hiddenContent.style.display = 'block';
-        button.textContent = 'Read Less';
-      } else {
-        hiddenContent.style.display = 'none';
-        button.textContent = 'Read More';
-      }
+      if (!hiddenContent || !hiddenContent.classList.contains('hidden-content')) return;
+      const isHidden = window.getComputedStyle(hiddenContent).display === 'none';
+      hiddenContent.style.display = isHidden ? 'block' : 'none';
+      button.textContent = isHidden ? 'Read Less' : 'Read More';
     }
     
     // Scroll to top to show all posts
